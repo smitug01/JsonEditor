@@ -184,21 +184,21 @@
             // licencesToolStripMenuItem
             // 
             this.licencesToolStripMenuItem.Name = "licencesToolStripMenuItem";
-            this.licencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.licencesToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.licencesToolStripMenuItem.Text = "License";
             this.licencesToolStripMenuItem.Click += new System.EventHandler(this.licencesToolStripMenuItem_Click);
             // 
             // reportBugToolStripMenuItem
             // 
             this.reportBugToolStripMenuItem.Name = "reportBugToolStripMenuItem";
-            this.reportBugToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reportBugToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.reportBugToolStripMenuItem.Text = "Report Bug";
             this.reportBugToolStripMenuItem.Click += new System.EventHandler(this.reportBugToolStripMenuItem_Click);
             // 
             // programInfoToolStripMenuItem
             // 
             this.programInfoToolStripMenuItem.Name = "programInfoToolStripMenuItem";
-            this.programInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.programInfoToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.programInfoToolStripMenuItem.Text = "Program Info";
             // 
             // treeView1
@@ -297,7 +297,7 @@
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.richTextBox2.Location = new System.Drawing.Point(57, 58);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(298, 280);
+            this.richTextBox2.Size = new System.Drawing.Size(632, 280);
             this.richTextBox2.TabIndex = 11;
             this.richTextBox2.Text = "";
             this.richTextBox2.TextChanged += new System.EventHandler(this.richTextBox2_TextChanged);

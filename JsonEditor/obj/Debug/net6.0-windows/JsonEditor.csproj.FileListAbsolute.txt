@@ -19,3 +19,5 @@ C:\Users\USER\source\repos\JsonEditor\JsonEditor\bin\Debug\net6.0-windows\Newton
 C:\Users\USER\source\repos\JsonEditor\JsonEditor\obj\Debug\net6.0-windows\JsonEditor.csproj.CopyComplete
 C:\Users\USER\source\repos\JsonEditor\JsonEditor\obj\Debug\net6.0-windows\JsonEditor.HelpLicense.resources
 C:\Users\USER\source\repos\JsonEditor\JsonEditor\obj\Debug\net6.0-windows\JsonEditor.Properties.Resources.resources
+C:\Users\USER\source\repos\JsonEditor\JsonEditor\obj\Debug\net6.0-windows\JsonEditor.HelpProgramInfo.resources
+C:\Users\USER\source\repos\JsonEditor\JsonEditor\obj\Debug\net6.0-windows\JsonEditor.HelpReportBug.resources

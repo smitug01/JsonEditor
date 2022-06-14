@@ -43,9 +43,7 @@ namespace JsonEditor
                 treeView1.Nodes.Clear();
                 var tNode = treeView1.Nodes[treeView1.Nodes.Add(new TreeNode(rootName))];
                 tNode.Tag = root;
-
                 AddNode(root, tNode);
-
                 treeView1.ExpandAll();
             }
             finally
@@ -65,7 +63,7 @@ namespace JsonEditor
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 localFilePath = sfd.FileName.ToString();
-                string fileNameExt = localFilePath.Substring(localFilePath.LastIndexOf("\\") + 1); 
+                // string fileNameExt = localFilePath.Substring(localFilePath.LastIndexOf("\\") + 1); 
             }
             return localFilePath;
         }
@@ -217,6 +215,18 @@ namespace JsonEditor
 
         }
 
+        public string XmlToJsonApi(string xml)
+        {
+            var post = "https://api.factmaven.com/xml-to-json?xml=" + xml;
+            WebRequest request = WebRequest.Create(post);
+            request.Credentials = CredentialCache.DefaultCredentials;
+            WebResponse response = request.GetResponse();
+            Stream dataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(dataStream);
+            string responseFromServer = reader.ReadToEnd();
+
+            return responseFromServer;
+        }
         public class NodeTag
         {
             public string NodeName;
@@ -264,23 +274,15 @@ namespace JsonEditor
                 xr.Close();
 
                 var xml = File.ReadAllText(AppDataLocation + "\\treeview.xml");
-                var post = "https://api.factmaven.com/xml-to-json?xml=" + xml;
-
-                WebRequest request = WebRequest.Create(post);
-                request.Credentials = CredentialCache.DefaultCredentials;
-                WebResponse response = request.GetResponse();
-                Stream dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream);
-                string responseFromServer = reader.ReadToEnd();
                 // MessageBox.Show(responseFromServer);
                 if (textBox1.Text != null)
                 {
-                    File.WriteAllTextAsync(path, responseFromServer);
+                    File.WriteAllTextAsync(path, XmlToJsonApi(xml));
                 }
                 else
                 {
                     try
-                    { File.WriteAllTextAsync(ShowSaveFileDialog(), responseFromServer); }
+                    { File.WriteAllTextAsync(ShowSaveFileDialog(), XmlToJsonApi(xml)); }
                     catch { }
                 }
             }
@@ -308,7 +310,7 @@ namespace JsonEditor
 
         private void button3_Click(object sender, EventArgs e)
         {
-            choose_location.Remove();
+            if (choose_location != null) choose_location.Remove();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -333,16 +335,8 @@ namespace JsonEditor
                 xr.Close();
 
                 var xml = File.ReadAllText(AppDataLocation + "\\treeview.xml");
-                var post = "https://api.factmaven.com/xml-to-json?xml=" + xml;
-
-                WebRequest request = WebRequest.Create(post);
-                request.Credentials = CredentialCache.DefaultCredentials;
-                WebResponse response = request.GetResponse();
-                Stream dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream);
-                string responseFromServer = reader.ReadToEnd();
                 // MessageBox.Show(responseFromServer);
-                File.WriteAllTextAsync(ShowSaveFileDialog(), responseFromServer);
+                File.WriteAllTextAsync(ShowSaveFileDialog(), XmlToJsonApi(xml));
             }
             else if (view_status == 1)
             {
@@ -500,82 +494,82 @@ namespace JsonEditor
 
         private void treeViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Save file before switch view status. (*check richtextbox data status)
-            if (richTextBox2.Text != null)
+            if (view_status != 0)
             {
-                var data = richTextBox2.Text; var tmp_path = (AppDataLocation + "\\transfer.json");
-                File.WriteAllTextAsync(tmp_path, data);
-                Thread.Sleep(500);
-                TreeViewReadFile(tmp_path);
-            }
+                // Save file before switch view status. (*check richtextbox data status)
+                if (richTextBox2.Text != null)
+                {
+                    var data = richTextBox2.Text; var tmp_path = (AppDataLocation + "\\transfer.json");
+                    File.WriteAllTextAsync(tmp_path, data);
+                    Thread.Sleep(500);
+                    TreeViewReadFile(tmp_path);
+                }
 
-            treeView1.Visible = true;
-            richTextBox2.Visible = false;
+                treeView1.Visible = true;
+                richTextBox2.Visible = false;
 
-            textBox2.Visible = true;
-            button1.Visible = true;
-            button2.Visible = true;
-            button3.Visible = true;
-            button4.Visible = true;
+                label4.Visible = true;
+                textBox2.Visible = true;
+                button1.Visible = true;
+                button2.Visible = true;
+                button3.Visible = true;
+                button4.Visible = true;
 
-            if (textBox1.Text != "" && richTextBox2.Text == null)
-            {
-                path = textBox1.Text;
-                TreeViewReadFile(path);
-                view_status = 0;
-            }
-            else 
-            { 
-                view_status = 0; 
+                if (textBox1.Text != "" && richTextBox2.Text == null)
+                {
+                    path = textBox1.Text;
+                    TreeViewReadFile(path);
+                    view_status = 0;
+                }
+                else
+                {
+                    view_status = 0;
+                }
             }
         }
 
         private void textViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (treeView1.Nodes.Count != 0)
+            if (view_status != 1)
             {
-                 xr = new XmlTextWriter(AppDataLocation + "\\treeview.xml", System.Text.Encoding.UTF8);
-                xr.WriteStartDocument();
-                //Write our root node
-                xr.WriteStartElement(treeView1.Nodes[0].Text);
-                foreach (TreeNode node in treeView1.Nodes)
+                if (treeView1.Nodes.Count != 0)
                 {
-                    saveNode2(node.Nodes);
+                    xr = new XmlTextWriter(AppDataLocation + "\\treeview.xml", System.Text.Encoding.UTF8);
+                    xr.WriteStartDocument();
+                    //Write our root node
+                    xr.WriteStartElement(treeView1.Nodes[0].Text);
+                    foreach (TreeNode node in treeView1.Nodes)
+                    {
+                        saveNode2(node.Nodes);
+                    }
+                    //Close the root node
+                    xr.WriteEndElement();
+                    xr.Close();
+
+                    var xml = File.ReadAllText(AppDataLocation + "\\treeview.xml");
+                    // MessageBox.Show(responseFromServer);
+                    richTextBox2.Text = XmlToJsonApi(xml);
+
                 }
-                //Close the root node
-                xr.WriteEndElement();
-                xr.Close();
 
-                var xml = File.ReadAllText(AppDataLocation + "\\treeview.xml");
-                var post = "https://api.factmaven.com/xml-to-json?xml=" + xml;
+                treeView1.Visible = false;
+                richTextBox2.Visible = true;
 
-                WebRequest request = WebRequest.Create(post);
-                request.Credentials = CredentialCache.DefaultCredentials;
-                WebResponse response = request.GetResponse();
-                Stream dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream);
-                string responseFromServer = reader.ReadToEnd();
-                // MessageBox.Show(responseFromServer);
-                richTextBox2.Text = responseFromServer;
+                label4.Visible = false;
+                textBox2.Visible = false;
+                button1.Visible = false;
+                button2.Visible = false;
+                button3.Visible = false;
+                button4.Visible = false;
 
+                if (textBox1.Text != "")
+                {
+                    string path = textBox1.Text;
+                    TextViewReadFile(path);
+
+                }
+                else view_status = 1;
             }
-
-            treeView1.Visible = false;
-            richTextBox2.Visible = true;
-
-            textBox2.Visible = false;
-            button1.Visible = false;
-            button2.Visible = false;
-            button3.Visible = false;
-            button4.Visible = false;
-
-            if (textBox1.Text != "")
-            {
-                string path = textBox1.Text;
-                TextViewReadFile(path);
-
-            }
-            else view_status = 1;
         }
 
         private void Form1_Load(object sender, EventArgs e)
