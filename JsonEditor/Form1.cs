@@ -361,7 +361,14 @@ namespace JsonEditor
 
         private void reportBugToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            HelpProgramInfo frm = new HelpProgramInfo();
+            frm.Show();
+        }
 
+        private void programInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HelpProgramInfo frm = new HelpProgramInfo();
+            frm.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)

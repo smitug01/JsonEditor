@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "3HBTsAD+mT1YBcfe/zHa7OZM0dRw0pxyn6JXA/OqDucFfvZoQUYZS2kDgXQejnYy5ZPLbIDa4hZPR+dn9wcHFA==",
+  "dgSpecHash": "81Fb3b1puz8eLlsJRloIZ2JF7REE82OJgaTWJrUJsPXntOSN2pIihAMaMiCE8EDV4eWjREiQsbBrA0Vvqz1c6A==",
   "success": true,
   "projectFilePath": "C:\\Users\\USER\\source\\repos\\JsonEditor\\JsonEditor\\JsonEditor.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\USER\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+    "C:\\Users\\USER\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\USER\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.17763.22\\microsoft.windows.sdk.net.ref.10.0.17763.22.nupkg.sha512"
   ],
   "logs": []
 }

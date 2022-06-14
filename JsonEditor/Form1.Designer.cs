@@ -184,22 +184,23 @@
             // licencesToolStripMenuItem
             // 
             this.licencesToolStripMenuItem.Name = "licencesToolStripMenuItem";
-            this.licencesToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.licencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.licencesToolStripMenuItem.Text = "License";
             this.licencesToolStripMenuItem.Click += new System.EventHandler(this.licencesToolStripMenuItem_Click);
             // 
             // reportBugToolStripMenuItem
             // 
             this.reportBugToolStripMenuItem.Name = "reportBugToolStripMenuItem";
-            this.reportBugToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.reportBugToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reportBugToolStripMenuItem.Text = "Report Bug";
             this.reportBugToolStripMenuItem.Click += new System.EventHandler(this.reportBugToolStripMenuItem_Click);
             // 
             // programInfoToolStripMenuItem
             // 
             this.programInfoToolStripMenuItem.Name = "programInfoToolStripMenuItem";
-            this.programInfoToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.programInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.programInfoToolStripMenuItem.Text = "Program Info";
+            this.programInfoToolStripMenuItem.Click += new System.EventHandler(this.programInfoToolStripMenuItem_Click);
             // 
             // treeView1
             // 
